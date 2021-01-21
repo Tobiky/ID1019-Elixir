@@ -27,24 +27,17 @@ defmodule Sorting do
         end 
     end
     
-    def merge([], right) do right end 
-    def merge(left, []) do left end 
-    # [5], [1,2] -> [5 | []], [1 | [2]]
-    # 5 < 1 -> false
-    # [1 | merge([5], [2])]
-    #   [5], [2] -> [5 | []], [2, []]
-    #   5 < 2 -> false
-    #   [2 | merge([5], [])]
-    #       [5], [] -> [5]
-    # [1 | [2 | [5]]]
-    # Doesn't work for some reason
-    def merge(left, right) do 
-       [ lhead | ltail ] = left
-       [ rhead | rtail ] = right
-       if lhead < rtail do
-           [ lhead | merge(ltail, right) ] 
+    def merge([], right) do 
+        right 
+    end 
+    def merge(left, []) do 
+        left 
+    end 
+    def merge([lhead | ltail], [rhead | rtail]) do 
+       if lhead < rhead do
+           [ lhead | merge(ltail, [rhead | rtail]) ] 
        else 
-           [ rhead | merge(left, rtail) ]
+           [ rhead | merge([lhead | ltail], rtail) ]
        end 
     end
     
