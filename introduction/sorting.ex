@@ -47,4 +47,30 @@ defmodule Sorting do
             [ x | tail ] -> msplit(tail, right, [ x | left ]) 
         end
     end
+
+
+    def qsort([]) do [] end
+    def qsort([p | l]) do 
+      {small, large} = qsplit(p, l, [], [])
+      small = qsort(small)
+      large = qsort(large)
+      append(small, [p | large])
+    end
+
+
+    def qsplit(_, [], small, large) do {small, large} end
+    def qsplit(p, [h | t], small, large) do
+      if h <= p  do
+        qsplit(p, t, [h | small], large)
+      else
+        qsplit(p, t, small, [h | large])
+      end
+    end
+
+    def append(left, right) do
+      case left do
+        [] -> right
+        [h | t] -> [h | append(t, right)]
+      end
+    end
 end
