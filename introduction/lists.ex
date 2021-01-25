@@ -60,7 +60,7 @@ defmodule Lists do
         [ head | remove(head, tail) ]
     end
 
-    def append([], b) do [[] | b ] end
+    def append([], b) do b end
     def append([ head | tail ], b) do
         [ head | append(tail, b)]
     end

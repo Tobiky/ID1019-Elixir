@@ -32,6 +32,7 @@ defmodule Recursion do
     end
   end
 
+  def qpower(_, 0) do 1 end
   def qpower(n, p) do
     left = rem(p, 2)
     case p do
